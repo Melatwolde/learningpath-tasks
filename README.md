@@ -36,6 +36,7 @@ A simple ToDo List application built with React, TypeScript, and Vite.
 - To delete a task, click the delete button next to the task.
 
 ## Screenshots
+all the scrrenshots found in the assets folder
 
 
 ```markdown
