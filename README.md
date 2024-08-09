@@ -37,8 +37,7 @@ A simple ToDo List application built with React, TypeScript, and Vite.
 
 ## Screenshots
 
-To add screenshots to your README, place the screenshot images in your project directory (e.g., in a folder named `screenshots`) and use the following markdown syntax to include them:
 
 ```markdown
-<img src = 'assets/addtask.png'>
+![empty](https://github.com/user-attachments/assets/539bfcd0-b138-44d6-9896-99f94ed0d4bf)
 ![addtask](https://github.com/user-attachments/assets/4536df8a-6694-40ff-a396-d5b6e9191380)
