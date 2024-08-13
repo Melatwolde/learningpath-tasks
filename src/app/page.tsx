@@ -1,35 +1,24 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/router';
-import JobCard from './componennts/jobcard';
-import Data from './componennts/jobdata';
+import jobData from './componennts/jobdata'; 
+import JobListing from './componennts/joblisting';
 
-const HomePage = () => {
+const JobPage: React.FC = () => {
   const router = useRouter();
-  const jobs = Data();
+  const { id } = router.query;
 
-  const handleCardClick = (jobId: number) => {
-    router.push(`/job/${jobId}`);
-  };
+  const job = jobData.find((job) => job.id === parseInt(id as string, 10));
+
+  if (!job) {
+    return <p>Job not found</p>;
+  }
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Job Listings</h1>
-      <div className="grid grid-cols-1 gap-8">
-        {jobs.map((job) => (
-          <div key={job.id} onClick={() => handleCardClick(job.id)} className="cursor-pointer">
-            <JobCard
-              image={job.image}
-              title={job.title}
-              company={job.company}
-              location={job.about.location}
-              description={job.description}
-            />
-          </div>
-        ))}
-      </div>
+      <JobListing {...job} />
     </div>
   );
 };
 
-export default HomePage;
+export default JobPage;
