@@ -1,5 +1,6 @@
 export default function Data() {
     return ([{
+        id: 1,
         "title": "Social media manager",
         "description": "As a Social Media Assistant, you will work closely with the social media manager or marketing team to execute social media strategies and campaigns. You will be responsible for assisting in the creation and scheduling of engaging content, monitoring social media channels, and interacting with followers. Your primary goal will be to enhance brand visibility, foster positive relationships with the audience, and drive engagement and conversions.",
         "responsibilities": [
@@ -32,6 +33,7 @@ export default function Data() {
         "image": "/job1.png"
         },
         {
+            id: 2,
         "title": "Web developer",
         "description": "As a Web Developer, you will be responsible for designing, coding, and modifying websites, from layout to function according to a client's specifications. You will create visually appealing sites that feature user-friendly design and clear navigation.",
         "responsibilities": [
@@ -61,9 +63,10 @@ export default function Data() {
             "required_skills": ["HTML", "CSS", "JavaScript", "PHP"]
         },
         "company": "Tech Innovators",
-        "image": "/job1.png"
+        "image": "./job2.png"
         },
         {
+            id: 3,
         "title": "Graphic designer",
         "description": "As a Graphic Designer, you will create visual concepts, using computer software or by hand, to communicate ideas that inspire, inform, and captivate consumers. You will develop the overall layout and production design for various applications such as advertisements, brochures, magazines, and corporate reports.",
         "responsibilities": [
@@ -102,6 +105,7 @@ export default function Data() {
         "image": "/job1.png"
         },
         {
+            id: 4,
         "title": "Data analyst",
         "description": "As a Data Analyst, you will be responsible for analyzing data sets to identify trends, patterns, and insights that can help inform business decisions. You will work closely with different departments to gather and interpret data, create reports, and provide recommendations based on your findings.",
         "responsibilities": [
@@ -135,6 +139,7 @@ export default function Data() {
         "image": "/job1.png"
         },
         {
+            id: 5,
         "title": "Customer support specialist",
         "description": "As a Customer Support Specialist, you will provide product/services information and resolve any emerging problems that our customers might face with accuracy and efficiency. You will be patient, empathetic, and passionately communicative.",
         "responsibilities": [
