@@ -46,5 +46,5 @@ npm run dev
 4. Open your browser and navigate to `http://localhost:3000/`.
 ![description](../task6/screenshots/listing.png)
 ![oppurtunity listing](../task6/screenshots/jobdescription.png)
-![description](../task6/screenshots/sort.png)
+![sorted](../task6/screenshots/sort.png)
 
