@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/1476ff70-8777-4ed1-ab5b-0414cce765ef)
 # Job Listing Application
 
 This is a Job Listing application built with Next.js, tailwindcss, typescript and Material-UI. The application displays job details, including description, responsibilities, ideal candidate traits, and other information.
@@ -50,4 +51,5 @@ npm run dev
 ![oppurtunity listing](../task6/screenshots/image.png)
 ![oppurtunity listing](../task6/screenshots/jobdescription.png)
 
+![image](https://github.com/user-attachments/assets/b167ef92-00d4-4cce-88de-9bcc02d6e8e7)
 
