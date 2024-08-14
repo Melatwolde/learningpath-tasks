@@ -44,6 +44,8 @@ npm run dev
  ```
 
 4. Open your browser and navigate to `http://localhost:3000/`.
+
+   all the screenshots found in screenshots folder
 ![description](../task6/screenshots/listing.png)
 ![oppurtunity listing](../task6/screenshots/jobdescription.png)
 ![sorted](../task6/screenshots/sort.png)
