@@ -19,10 +19,7 @@ export default function Home() {
   return (
     
     <main>
-      <div>
-          <h1>Opportunities</h1>
-          
-      </div>
+      
       {selectedJob ? (
         
         <JobList jobs={updatedData} onClick={handleCardClick}/>
