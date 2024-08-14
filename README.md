@@ -45,11 +45,8 @@ npm run dev
  ```
 
 4. Open your browser and navigate to `http://localhost:3000/`.
-![description](../task6/screenshots/image.png)
-![oppurtunity listing](../task6/screenshots/sort.png)
-![oppurtunity listing](../task6/screenshots/listing.png)
-![oppurtunity listing](../task6/screenshots/image.png)
-![oppurtunity listing](../task6/screenshots/jobdescription.png)
+
 
 ![image](https://github.com/user-attachments/assets/b167ef92-00d4-4cce-88de-9bcc02d6e8e7)
+![oppurtunity listing](../task6/screenshots/jobdescription.png)
 
