@@ -1,35 +1,34 @@
 'use client';
-import React from 'react';
-import { useRouter } from 'next/router';
-import JobCard from './componennts/jobcard';
-import Data from './componennts/jobdata';
 
-const HomePage = () => {
+import JobCard from "./componennts/jobcard";
+import JobList from "./componennts/joblisting";
+import Data from "./componennts/jobdata";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+export default function Home() {
+  const [selectedJob, setSelectedJob] = useState<{ title: string } | null>(null); // State to track the selected job
   const router = useRouter();
-  const jobs = Data();
 
-  const handleCardClick = (jobId: number) => {
-    router.push(`/job/${jobId}`);
+  const handleCardClick = (job: { title: string }) => {
+    setSelectedJob(job);
   };
 
-  return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Job Listings</h1>
-      <div className="grid grid-cols-1 gap-8">
-        {jobs.map((job) => (
-          <div key={job.id} onClick={() => handleCardClick(job.id)} className="cursor-pointer">
-            <JobCard
-              image={job.image}
-              title={job.title}
-              company={job.company}
-              location={job.about.location}
-              description={job.description}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+  const updatedData = Data.map(job => ({ ...job, location: '', categories: [] }));
 
-export default HomePage;
+  return (
+    
+    <main>
+      <div>
+          <h1>Opportunities</h1>
+          
+      </div>
+      {selectedJob ? (
+        
+        <JobList jobs={updatedData} onClick={handleCardClick}/>
+      ) : (
+        <JobCard jobs={updatedData} onClick={handleCardClick}/>
+      )}
+    </main>
+  );
+}

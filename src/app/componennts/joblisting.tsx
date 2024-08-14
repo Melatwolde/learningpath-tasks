@@ -1,8 +1,7 @@
 'use client';
-import Image from 'next/image';
-import { colors, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { LocationOnRounded } from '@mui/icons-material';
+import  LocationOnRounded  from '@mui/icons-material/LocationOnRounded';
 import React from 'react';
 import icon1 from '../icons/first.svg';
 import icon2 from '../icons/second.svg';
@@ -11,54 +10,69 @@ import icon4 from '../icons/fourth.svg';
 import icon5 from '../icons/fifth.svg';
 
 interface JobProps {
-    image: string;
-    title: string;
-    company: string;
+  image: string;
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  responsibilities: string[];
+  categories: string[];
+  ideal_candidate: {
+    age: string;
+    gender: string;
+    traits: string[];
+  };
+  when_where: string;
+  about: {
+    posted_on: string;
+    deadline: string;
     location: string;
-    description: string;
-    responsibilities: string[];
+    start_date: string;
+    end_date: string;
     categories: string[];
-    ideal_candidate: {
-      age: string;
-      gender: string;
-      traits: string[];
-    };
-    when_where: string;
-    about: {
-      posted_on: string;
-      deadline: string;
-      location: string;
-      start_date: string;
-      end_date: string;
-      categories: string[];
-      required_skills: string[];
-    };
-  }
+    required_skills: string[];
+  };
+}
 
-const JobListing: React.FC<JobProps> = ({ image, title, company, location, description, responsibilities, categories, ideal_candidate, when_where, about }) => {
-  function splitString(item: string): string[] {
-    const [firstPart, ...rest] = item.split(':');
-    return [`${firstPart}:`, rest.join(':')];
-  }
+interface JobListingProps {
+  jobs: JobProps[];
+  onClick: (job: JobProps) => void;
+}
+
+const JobListing: React.FC<JobListingProps> = ({ jobs, onClick }) => {
+  const {
+    description,
+    responsibilities,
+    ideal_candidate,
+    when_where,
+    about,
+  } = jobs[0]; 
+  const splitString = (str: string): string[] => {
+    const splitIndex = str.indexOf(' ');
+    if (splitIndex === -1) return [str, ''];
+    return [str.slice(0, splitIndex), str.slice(splitIndex + 1)];
+  };
 
   return (
     <div className="flex space-x-28">
       {/* container1 */}
       <div className="w-2/3 flex-1 flex flex-col space-y-8 p-4">
         <div className="-mb-1">
-          <h1 className="text-2xl font-bold ">Description</h1>
+          <h1 className="text-2xl font-bold">Description</h1>
           <p>{description}</p>
         </div>
         <div className="-mb-1">
-          <h3 className="text-xl font-semibold -mb-1 ">Responsibilities</h3>
-          {responsibilities.map((responsibility, index) => (
-            <ListItem key={index} className='-mb-1'>
-              <ListItemIcon>
-                <CheckCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary={responsibility} />
-            </ListItem>
-          ))}
+          <h3 className="text-xl font-semibold -mb-1">Responsibilities</h3>
+          <List>
+            {responsibilities.map((responsibility, index) => (
+              <ListItem key={index} className="-mb-1">
+                <ListItemIcon>
+                  <CheckCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary={responsibility} />
+              </ListItem>
+            ))}
+          </List>
         </div>
         <div className="space-y-3 mt-10">
           <h1 className="font-bold text-xl size6">Ideal Candidate we want</h1>
@@ -86,9 +100,9 @@ const JobListing: React.FC<JobProps> = ({ image, title, company, location, descr
         </div>
       </div>
       {/* container2 */}
-      <div className="w-3/12 mt-8 mb-4 ">
+      <div className="w-3/12 mt-8 mb-4">
         {/* box1 */}
-        <div className="">
+        <div>
           <h4 className="text-lg font-semibold mb-2">About</h4>
           <ul>
             <p className="ml-16">Posted On</p>
@@ -118,12 +132,12 @@ const JobListing: React.FC<JobProps> = ({ image, title, company, location, descr
             </li>
           </ul>
         </div>
-        <div className='mt-5 mr-6 border-r-0 border-l-0 space-y-5 border-b-0 border-2 py-4'>
-          <h1 className='font-semibold'>Categories</h1>
-          <ul className='flex space-x-2'>
+        <div className="mt-5 mr-6 border-r-0 border-l-0 space-y-5 border-b-0 border-2 py-4">
+          <h1 className="font-semibold">Categories</h1>
+          <ul className="flex space-x-2">
             {about.categories.map((item, index) => (
               <li
-                className='text-black px-4 py-2 rounded-full cursor-pointer transition duration-300 ease-in-out'
+                className="text-black px-4 py-2 rounded-full cursor-pointer transition duration-300 ease-in-out"
                 style={{
                   backgroundColor: index % 2 === 0 ? 'rgba(235, 133, 51, 0.1)' : 'rgba(86, 205, 173, 0.1)',
                 }}
@@ -134,11 +148,13 @@ const JobListing: React.FC<JobProps> = ({ image, title, company, location, descr
             ))}
           </ul>
         </div>
-        <div className='mt-5 mr-6 py-4 border-r-0 border-l-0 space-y-3 border-b-0 border-2'>
-          <h1 className='font-semibold'>Required Skills</h1>
-          <ul className='flex flex-wrap space-y-1 items-center gap-2'>
+        <div className="mt-5 mr-6 py-4 border-r-0 border-l-0 space-y-3 border-b-0 border-2">
+          <h1 className="font-semibold">Required Skills</h1>
+          <ul className="flex flex-wrap space-y-1 items-center gap-2">
             {about.required_skills.map((skill, index) => (
-              <li className='self-center p-1 text-purple-600 bg-purple-100' key={index}>{skill}</li>
+              <li className="self-center p-1 text-purple-600 bg-purple-100" key={index}>
+                {skill}
+              </li>
             ))}
           </ul>
         </div>
