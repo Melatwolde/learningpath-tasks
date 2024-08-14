@@ -38,5 +38,5 @@ A simple ToDo List application built with React, TypeScript, and Vite.
 ## Screenshots
 
 ```markdown
-![empty](assets/empty.png)
-![addtask](assets/addtask.png)
+![empty](screenshots/empty.png)
+![addtask](screenshots/addtask.png)
