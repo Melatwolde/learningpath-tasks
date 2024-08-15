@@ -13,13 +13,9 @@ export default function Home() {
   if (!jobs || jobs.length === 0) return <div>No jobs available.</div>;
 
   const handleCardClick = (jobId: string) => {
-<<<<<<< HEAD
-    router.push(`/jobs/${jobId}`);
-=======
-    router.push( `/jobs/${jobId}` );
->>>>>>> origin/task6-with-api
+    // handle card click logic here
   };
-
+  
   return (
     <main>
       <JobCard jobs={jobs} onClick={handleCardClick} />
