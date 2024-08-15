@@ -43,10 +43,18 @@ To run the application in development mode:
 ```sh
 npm run dev
  ```
+![image](https://github.com/user-attachments/assets/e3ea9752-99c9-4933-a48d-60a9d703d694)
+![Screenshot (7)](https://github.com/user-attachments/assets/83bf79e7-fd24-4828-9968-4a0ff86d1655)
+
+
 
 4. Open your browser and navigate to `http://localhost:3000/`.
 <<<<<<< HEAD
 
+
+
+![image](https://github.com/user-attachments/assets/e3ea9752-99c9-4933-a48d-60a9d703d694)
+![Screenshot (7)](https://github.com/user-attachments/assets/83bf79e7-fd24-4828-9968-4a0ff86d1655)
 
 >>>>>>> origin/task6-with-api
 
