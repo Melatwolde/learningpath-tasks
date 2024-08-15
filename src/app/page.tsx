@@ -1,32 +1,24 @@
 'use client';
 
 import JobCard from "./componennts/jobcard";
-import JobList from "./componennts/joblisting";
-import Data from "./componennts/jobdata";
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { JobProps } from './componennts/jobcard';
+import { useGetAllOpportunitiesQuery } from './store/jobSlice';
 
 export default function Home() {
-  const [selectedJob, setSelectedJob] = useState<{ title: string } | null>(null); 
   const router = useRouter();
+  const { data: jobs, error, isLoading } = useGetAllOpportunitiesQuery({});
 
-  const handleCardClick = (job: { title: string }) => {
-    setSelectedJob(job);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading jobs.</div>;
+  if (!jobs || jobs.length === 0) return <div>No jobs available.</div>;
+
+  const handleCardClick = (jobId: string) => {
+    router.push(`/jobs/${jobId}`);
   };
 
-  const updatedData = Data.map(job => ({ ...job, location: '', categories: [] }));
-
   return (
-    
     <main>
-      
-      {selectedJob ? (
-        
-        <JobList jobs={updatedData} onClick={handleCardClick}/>
-      ) : (
-        <JobCard jobs={updatedData as unknown as JobProps[]} onClick={handleCardClick}/>
-      )}
+      <JobCard jobs={jobs} onClick={handleCardClick} />
     </main>
   );
 }

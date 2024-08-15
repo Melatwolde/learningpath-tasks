@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const opportunityApi = createApi({
     reducerPath: "opportunities",
-    baseQuery: fetchBaseQuery({ baseUrl: "https://akil-backend.onrender.com/"}),
+    baseQuery: fetchBaseQuery({ baseUrl: "https://akil-backend.onrender.com/" }),
     endpoints: (builder) => ({
         getAllOpportunities: builder.query({
             query: () => "/opportunities/search",
@@ -15,4 +15,4 @@ export const opportunityApi = createApi({
     })
 })
 
-export const { useGetAllOpportunitiesQuery, useGetSingleOpportinityQuery} = opportunityApi
+export const { useGetAllOpportunitiesQuery, useGetSingleOpportinityQuery } = opportunityApi;

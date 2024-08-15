@@ -48,5 +48,7 @@ npm run dev
 ![oppurtunity listing](../task6/screenshots/jobdescription.png)
 ![oppurtunity listing](../task6/screenshots/sort.png)
 ![oppurtunity listing](../task6/screenshots/listing.png)
+![oppurtunity listing](../task6/screenshots/api.png)
+
 
 

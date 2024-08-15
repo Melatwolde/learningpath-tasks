@@ -1,0 +1,163 @@
+'use client';
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import {useGetAllOpportunitiesQuery, useGetSingleOpportinityQuery} from '../../store/jobSlice';
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import LocationOnRounded from '@mui/icons-material/LocationOnRounded';
+import icon1 from '../../icons/first.svg';
+import icon2 from '../../icons/second.svg';
+import icon3 from '../../icons/third.svg';
+import icon4 from '../../icons/fourth.svg';
+import icon5 from '../../icons/fifth.svg';
+import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'next/navigation';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
+const JobDetail = ({ params }: { params: { id: string } }) => {
+    const { id } = params;
+
+    const {data, error, isLoading} = useGetSingleOpportinityQuery(id);
+    console.log(data);
+    const job = data?.data
+    
+
+  if (isLoading) return <div className= 'grid place-items-center min-h-screen'>Loading...</div>;
+  if (error || !job) return <div>Error loading job details.</div>;
+
+  const description = job.description;
+  const responsibilities = job.responsibilities || '';
+  const responsibilityList = responsibilities.split('\n');
+  const idealCandidate = job.idealCandidate;
+  const when_where = job.whenAndWhere; 
+  const about = {
+    posted_on: job.datePosted,
+    deadline: job.deadline,
+    location: job.location,
+    start_date: job.startDate,
+    end_date: job.endDate,
+    categories: job.categories,
+    required_skills: job.requiredSkills,
+  };
+
+  const splitString = (str: string): string[] => {
+    const splitIndex = str.indexOf(' ');
+    if (splitIndex === -1) return [str, ''];
+    return [str.slice(0, splitIndex), str.slice(splitIndex + 1)];
+  };
+
+  return (
+    <div className="flex space-x-28 mt-2">
+      {/* container1 */}
+      <div className="w-2/3 flex-1 flex flex-col space-y-8 p-4 ml-6">
+        <div className="-mb-1">
+          <h1 className="text-2xl font-bold">Description</h1>
+          <p>{job.description}</p>
+        </div>
+        <div className="-mb-1">
+          <h3 className="text-xl font-semibold -mb-1">Responsibilities</h3>
+          <List>
+        {responsibilityList.map((responsibility: string, index: number) => (
+          <ListItem key={index} className="-mb-1">
+            <ListItemIcon>
+              <CheckCircleOutlineIcon style={{ color: 'lightblue' }} />
+            </ListItemIcon>
+            <ListItemText primary={responsibility} />
+          </ListItem>
+        ))}
+      </List>
+        </div>
+        <div className="space-y-3 mt-10">
+          <h1 className="font-bold text-xl size6">Ideal Candidate we want</h1>
+          <ul className='pl-6 leading-6 mt-3'>
+          <li className='font-Epilogue list-disc'>{idealCandidate}</li>
+        </ul>
+          {/* <ul className="list-disc text-base ml-5">
+            <li className="clr1 font-semibold">
+              <div className="space-x-2 flex">
+                <span>Age({idealCandidate?.age})</span>
+                <span>Gender({ideal_candidate?.gender})</span>
+              </div>
+            </li>
+            {ideal_candidate?.traits?.map((item: string, index: number) => (
+              <li key={index} className="clr1">
+                <span className="font-bold">{splitString(item)[0]}</span>
+                <span>{splitString(item)[1]}</span>
+              </li>
+            ))}
+          </ul> */}
+        </div>
+        <div className="space-y-4 mt-10">
+          <h1 className="font-semibold text-xl size6">When & Where</h1>
+          <div className="flex space-x-4 items-center">
+            <LocationOnRounded />
+            <p>{when_where}</p>
+          </div>
+        </div>
+      </div>
+      {/* container2 */}
+      <div className="w-3/12 mt-8 mb-4 mr-2">
+        {/* box1 */}
+        <div>
+          <h4 className="text-lg font-semibold mb-2">About</h4>
+          <ul>
+            <p className="ml-16">Posted On</p>
+            <li className="flex items-center">
+              <img src={icon1.src} alt="icon" className="mr-2 -mt-2" />
+              <span className="ml-2 font-bold">{about.posted_on}</span>
+            </li>
+            <p className="ml-16">Deadline</p>
+            <li className="flex items-center">
+              <img src={icon2.src} alt="icon" className="mr-2" />
+              <span className="ml-2 font-bold">{about.deadline}</span>
+            </li>
+            <p className="ml-16">Location</p>
+            <li className="flex items-center">
+              <img src={icon3.src} alt="icon" className="mr-2" />
+              <span className="ml-2 font-bold">{about.location}</span>
+            </li>
+            <p className="ml-16">Start Date</p>
+            <li className="flex items-center">
+              <img src={icon4.src} alt="icon" className="mr-2" />
+              <span className="ml-2 font-bold">{about.start_date}</span>
+            </li>
+            <p className="ml-16">End Date</p>
+            <li className="flex items-center">
+              <img src={icon5.src} alt="icon" className="mr-2" />
+              <span className="ml-2 font-semibold">{about.end_date}</span>
+            </li>
+          </ul>
+        </div>
+        <div className="mt-5 mr-6 border-r-0 border-l-0 space-y-5 border-b-0 border-2 py-4">
+          <h1 className="font-semibold">Categories</h1>
+          <ul className="flex space-x-2">
+            {(about.categories||[]).map((item: string, index: number) => (
+              <li
+                className="text-black px-4 py-2 rounded-full cursor-pointer transition duration-300 ease-in-out"
+                style={{
+                  backgroundColor: index % 2 === 0 ? 'rgba(235, 133, 51, 0.1)' : 'rgba(86, 205, 173, 0.1)',
+                }}
+                key={index}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="mt-5 mr-6 py-4 border-r-0 border-l-0 space-y-3 border-b-0 border-2">
+          <h1 className="font-semibold">Required Skills</h1>
+          <ul className="flex flex-wrap space-y-1 items-center gap-2">
+            {(about.required_skills || []).map((skill : string, index: number) => (
+              <li className="self-center p-2 text-purple-600 bg-purple-100 rounded-full" key={index}>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default JobDetail;

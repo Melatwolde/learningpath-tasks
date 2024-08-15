@@ -18,7 +18,7 @@ export interface JobProps {
 
 interface JobCardProps {
   jobs: JobProps[];
-  onClick: (job: JobProps) => void; 
+  onClick: (jobid: string) => void; 
 }
 
 const JobCard: React.FC<JobCardProps> = ({ onClick }) => {
@@ -44,7 +44,7 @@ const JobCard: React.FC<JobCardProps> = ({ onClick }) => {
   };
 
   if (isLoading) {
-    return <p className=''>Loading jobs...</p>;
+    return <p className='grid place-items-center min-h-screen'>Loading jobs...</p>;
   }
 
   if (error) {
@@ -78,7 +78,7 @@ const JobCard: React.FC<JobCardProps> = ({ onClick }) => {
           key={job.id}
           className="container mx-auto my-6 p-2 border bg-slate-50 rounded-3xl flex space-x-4 "
           style={{ width: '900px' }}
-          onClick={() => onClick(job)}
+          onClick={() => onClick(job.id)}
         >
           <div className='grid grid-cols-12 p-2 border-1 rounded-3xl font-Epilogue hover:bg-cardHover '>
             <div className='col-span-1'>
