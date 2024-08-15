@@ -1,13 +1,15 @@
 'use client';
+
+import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import  LocationOnRounded  from '@mui/icons-material/LocationOnRounded';
-import React from 'react';
+import LocationOnRounded from '@mui/icons-material/LocationOnRounded';
 import icon1 from '../icons/first.svg';
 import icon2 from '../icons/second.svg';
 import icon3 from '../icons/third.svg';
 import icon4 from '../icons/fourth.svg';
 import icon5 from '../icons/fifth.svg';
+import { useGetAllOpportunitiesQuery } from '../store/jobSlice';
 
 interface JobProps {
   image: string;
@@ -39,14 +41,24 @@ interface JobListingProps {
   onClick: (job: JobProps) => void;
 }
 
-const JobListing: React.FC<JobListingProps> = ({ jobs, onClick }) => {
-  const {
-    description,
-    responsibilities,
-    ideal_candidate,
-    when_where,
-    about,
-  } = jobs[0]; 
+const JobListing: React.FC<JobListingProps> = ({ onClick }) => {
+  const { data: jobs, error, isLoading } = useGetAllOpportunitiesQuery({});
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading jobs.</div>;
+  if (!jobs || jobs.length === 0) return <div>No jobs available.</div>;
+  const firstJob = jobs[1]; 
+
+  if (!firstJob) {
+    return <div>No job details available.</div>;
+  }
+
+  const description = firstJob.description;
+  const responsibilities = firstJob.responsibilities;
+  const ideal_candidate = firstJob.ideal_candidate;
+  const when_where = firstJob.when_where;
+  const about = firstJob.about;
+
   const splitString = (str: string): string[] => {
     const splitIndex = str.indexOf(' ');
     if (splitIndex === -1) return [str, ''];
@@ -64,7 +76,7 @@ const JobListing: React.FC<JobListingProps> = ({ jobs, onClick }) => {
         <div className="-mb-1">
           <h3 className="text-xl font-semibold -mb-1">Responsibilities</h3>
           <List>
-            {responsibilities.map((responsibility, index) => (
+            {responsibilities.map((responsibility: string, index: number) => (
               <ListItem key={index} className="-mb-1">
                 <ListItemIcon>
                   <CheckCircleIcon />
@@ -135,7 +147,7 @@ const JobListing: React.FC<JobListingProps> = ({ jobs, onClick }) => {
         <div className="mt-5 mr-6 border-r-0 border-l-0 space-y-5 border-b-0 border-2 py-4">
           <h1 className="font-semibold">Categories</h1>
           <ul className="flex space-x-2">
-            {about.categories.map((item, index) => (
+            {about.categories.map((item: string, index: number) => (
               <li
                 className="text-black px-4 py-2 rounded-full cursor-pointer transition duration-300 ease-in-out"
                 style={{
@@ -151,7 +163,7 @@ const JobListing: React.FC<JobListingProps> = ({ jobs, onClick }) => {
         <div className="mt-5 mr-6 py-4 border-r-0 border-l-0 space-y-3 border-b-0 border-2">
           <h1 className="font-semibold">Required Skills</h1>
           <ul className="flex flex-wrap space-y-1 items-center gap-2">
-            {about.required_skills.map((skill, index) => (
+            {about.required_skills.map((skill : string, index: number) => (
               <li className="self-center p-1 text-purple-600 bg-purple-100" key={index}>
                 {skill}
               </li>
