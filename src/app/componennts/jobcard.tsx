@@ -6,6 +6,7 @@ import image1 from './cardavaters/image1.png';
 import image2 from './cardavaters/image2.png';
 import image3 from './cardavaters/image3.png';
 import image4 from './cardavaters/image4.png';
+import { useRouter } from 'next/navigation';
 
 export interface JobProps {
   id: string;
@@ -30,6 +31,10 @@ const JobCard: React.FC<JobCardProps> = ({ onClick }) => {
   const getRandomImage = () => {
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
+  };
+
+  const handleCardClick = (jobId: string) => {
+    router.push(`/jobs/${jobId}`);
   };
 
   const sortJobs = (jobs: JobProps[]) => {
