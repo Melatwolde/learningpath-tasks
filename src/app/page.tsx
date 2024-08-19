@@ -18,7 +18,7 @@ export default function Home() {
   
   return (
     <main>
-      <JobCard jobs={jobs} onClick={handleCardClick} />
+      <JobCard key={job.id} job={job} onClick={handleCardClick} />
     </main>
   );
 }
